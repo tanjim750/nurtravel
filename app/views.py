@@ -17,6 +17,7 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
+from selenium.webdriver.chrome.service import Service
 from anticaptchaofficial.recaptchav3proxyless import *
 
 class LoginView(View):
@@ -452,9 +453,9 @@ class MakeBooking(View):
         options.add_argument("-disable-gpu")
         options.add_argument("-no-sandbox")
         options.firefox_binary = FirefoxBinary(os.environ.get('FIREFOX_BIN'))
-        # binary = FirefoxBinary(os.environ.get('FIREFOX_BIN'))
+        service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
         self.driver = webdriver.Firefox(
-        executable_path=os.environ.get('GECKODRIVER_PATH'),
+        service=service,
         options=options)
 
         self.url = "https://wafid.com/book-appointment/"
