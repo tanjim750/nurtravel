@@ -632,10 +632,10 @@ class MakeBooking(View):
         page_source = self.driver.page_source
 
         # Define a regular expression pattern for UUIDs
-        uuid_pattern = re.compile(r'data-widget-uuid="([^"]+)"')
+        #uuid_pattern = re.compile(r'data-widget-uuid="([^"]+)"')
 
         # Find all matches in the page source
-        uuid = uuid_pattern.findall(page_source)[0]
+        #uuid = uuid_pattern.findall(page_source)[0]
         
         self.driver.find_element(By.NAME, "country").send_keys(self.country)
         time.sleep(0.5)
@@ -689,7 +689,7 @@ class MakeBooking(View):
         return_url = self.driver.current_url
         count = 1
         while (return_url == self.url and count < 3):
-            self.solve_captcha(uuid)
+            #self.solve_captcha(uuid)
             checkbox = self.driver.find_element(By.CSS_SELECTOR, "input[id=id_confirm]")
             # Find the parent div of the checkbox
             parent_div = checkbox.find_element(By.XPATH, "./..")
