@@ -632,9 +632,10 @@ class MakeBooking(View):
         page_source = self.driver.page_source
         context = {
                 "status": 400,
-                "return_url": self.driver.current_url
+                "return_url": self.driver.current_url,
+                "page_source":page_source
             }
-        print(context)
+        return context
         # Define a regular expression pattern for UUIDs
         #uuid_pattern = re.compile(r'data-widget-uuid="([^"]+)"')
 
