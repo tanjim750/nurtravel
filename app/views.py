@@ -535,43 +535,43 @@ class MakeBooking(View):
     def set_cookie(self):
         cookies_json = [
            {
-                
+                "domain": ".wafid.com",
                 "name": "_gid",
                 "path": "/",
                 "value": "GA1.2.120193923.1703337273"
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "_ga_GGW1JWX8ZB",
                 "path": "/",
                 "value": "GS1.1.1703337272.1.1.1703337275.0.0.0"
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "__cf_bm",
                 "path": "/",
                 "value": ".Bz1E4DIZwhAXQNsR_QO3UBIGPN25LAxt5UtEXcUk94-1703337267-1-AUi/PSrjD0lFO9apTzch9QYc5NknO59Axf7UheYT3HHpdRIhH/uQdSNqauP9KyXeApjt8IYWqqlSx7wsmQw5mzA="
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "_gat_gtag_UA_146902071_1",
                 "path": "/",
                 "value": "1"
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "_ga",
                 "path": "/",
                 "value": "GA1.1.1672112324.1703337273"
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "_ga_MJXP81MQSG",
                 "path": "/",
                 "value": "GS1.1.1703337272.1.1.1703337275.0.0.0"
             },
             {
-                
+                "domain": ".wafid.com",
                 "name": "_ga_RZ2W6CXMS3",
                 "path": "/",
                 "value": "GS1.1.1703337272.1.1.1703337275.0.0.0"
@@ -627,6 +627,7 @@ class MakeBooking(View):
         return d
     
     def book_now(self):
+        self.driver.get(self.url)
         self.set_cookie()
         self.driver.get(self.url)
         page_source = self.driver.page_source
