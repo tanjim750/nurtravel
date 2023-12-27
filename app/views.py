@@ -444,8 +444,19 @@ class MakeBooking(View):
             self.obj = obj.first()
         else:
             self.obj = DefaultBookinInfo.objects.create()
+        options = webdriver.FirefoxOptions()
+        # enable trace level for debugging 
+        options.log.level = "trace"
+        options.add_argument("-remote-debugging-port=9224")
+        options.add_argument("-headless")
+        options.add_argument("-disable-gpu")
+        options.add_argument("-no-sandbox")
+        binary = FirefoxBinary(os.environ.get('FIREFOX_BIN'))
+        self.driver = webdriver.Firefox(
+        firefox_binary=binary,
+        executable_path=os.environ.get('GECKODRIVER_PATH'),
+        options=options)
 
-        self.driver = webdriver.Chrome()
         self.url = "https://wafid.com/book-appointment/"
         self.default_value()
 
