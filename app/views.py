@@ -627,8 +627,8 @@ class MakeBooking(View):
         return d
     
     def book_now(self):
-        self.driver.get(self.url)
         self.set_cookie()
+        self.driver.get(self.url)
         page_source = self.driver.page_source
         context = {
                 "status": 400,
