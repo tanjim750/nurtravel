@@ -452,7 +452,7 @@ class MakeBooking(View):
         options.add_argument("-headless")
         options.add_argument("-disable-gpu")
         options.add_argument("-no-sandbox")
-        options.firefox_binary = FirefoxBinary(os.environ.get('FIREFOX_BIN'))
+        options.binary_location = os.environ.get('FIREFOX_BIN')
         service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
         self.driver = webdriver.Firefox(
         service=service,
