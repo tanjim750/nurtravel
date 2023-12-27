@@ -634,7 +634,7 @@ class MakeBooking(View):
                 "status": 400,
                 "return_url": self.driver.current_url
             }
-        return JsonResponse(context)
+        print(context)
         # Define a regular expression pattern for UUIDs
         #uuid_pattern = re.compile(r'data-widget-uuid="([^"]+)"')
 
