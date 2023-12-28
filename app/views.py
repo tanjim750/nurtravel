@@ -461,8 +461,11 @@ class MakeBooking(View):
         options = uc.ChromeOptions() 
         options.add_argument("--headless")
         service = Service(executable_path=uc.v2.ChromeDriverManager())
-
-        self.driver = uc.Chrome(use_subprocess=True, options=options,executable_path=uc.v2.ChromeDriverManager().install())
+        options.binary_location = os.environ.get("GOOGLE_BIN")
+        options.add_argument("--headless")
+        options.add_argument("--disable-dev-shm-usage")
+        options.add_argument("--no-sandbox")
+        self.driver = uc.Chrome(use_subprocess=True, options=options,service=service)
 
         self.url = "https://wafid.com/book-appointment/"
         self.default_value()
