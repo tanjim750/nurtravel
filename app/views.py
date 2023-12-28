@@ -18,6 +18,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium.webdriver.chrome.service import Service
+import undetected_chromedriver as uc
 from anticaptchaofficial.recaptchav3proxyless import *
 
 class LoginView(View):
@@ -445,18 +446,22 @@ class MakeBooking(View):
             self.obj = obj.first()
         else:
             self.obj = DefaultBookinInfo.objects.create()
-        options = webdriver.FirefoxOptions()
-        # enable trace level for debugging 
-        options.log.level = "trace"
-        # options.add_argument("-remote-debugging-port=9224")
-        options.add_argument("-headless")
-        options.add_argument("-disable-gpu")
-        options.add_argument("-no-sandbox")
-        options.binary_location = os.environ.get('FIREFOX_BIN')
-        service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
-        self.driver = webdriver.Firefox(
-        service=service,
-        options=options)
+        # options = webdriver.FirefoxOptions()
+        # # enable trace level for debugging 
+        # options.log.level = "trace"
+        # # options.add_argument("-remote-debugging-port=9224")
+        # options.add_argument("-headless")
+        # options.add_argument("-disable-gpu")
+        # options.add_argument("-no-sandbox")
+        # options.binary_location = os.environ.get('FIREFOX_BIN')
+        # service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
+        # self.driver = webdriver.Firefox(
+        # service=service,
+        # options=options)
+        options = uc.ChromeOptions() 
+        options.headless = True  # Set headless to False to run in non-headless mode
+
+        self.driver = uc.Chrome(use_subprocess=True, options=options)
 
         self.url = "https://wafid.com/book-appointment/"
         self.default_value()
@@ -761,14 +766,14 @@ class AddToTab(View):
                 options = webdriver.FirefoxOptions()
                 # enable trace level for debugging 
                 options.log.level = "trace"
-                options.add_argument("-remote-debugging-port=9224")
+                # options.add_argument("-remote-debugging-port=9224")
                 options.add_argument("-headless")
                 options.add_argument("-disable-gpu")
                 options.add_argument("-no-sandbox")
-                binary = FirefoxBinary(os.environ.get('FIREFOX_BIN'))
+                options.binary_location = os.environ.get('FIREFOX_BIN')
+                service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
                 driver = webdriver.Firefox(
-                firefox_binary=binary,
-                executable_path=os.environ.get('GECKODRIVER_PATH'),
+                service=service,
                 options=options)
 
                 self.pay_instance.add_to_tab(link,driver)
