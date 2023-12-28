@@ -767,18 +767,14 @@ class AddToTab(View):
             for obj in wafid_link:
                 link = obj.link
                 
-                options = webdriver.FirefoxOptions()
-                # enable trace level for debugging 
-                options.log.level = "trace"
-                # options.add_argument("-remote-debugging-port=9224")
-                options.add_argument("-headless")
-                options.add_argument("-disable-gpu")
-                options.add_argument("-no-sandbox")
-                options.binary_location = os.environ.get('FIREFOX_BIN')
-                service = Service(executable_path=os.environ.get('GECKODRIVER_PATH'))
-                driver = webdriver.Firefox(
-                service=service,
-                options=options)
+                options = uc.ChromeOptions() 
+                options.add_argument("--headless")
+                service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
+                options.binary_location = os.environ.get("GOOGLE_BIN")
+                options.add_argument("--headless")
+                options.add_argument("--disable-dev-shm-usage")
+                options.add_argument("--no-sandbox")
+                driver = uc.Chrome(use_subprocess=True, options=options,service=service)
 
                 self.pay_instance.add_to_tab(link,driver)
                 self.context["links"].append(
