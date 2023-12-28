@@ -901,7 +901,11 @@ class PayBooking():
 
             # Check the return URL after opening the payment URL
             current_url = self.driver.current_url
-
+            context = {
+                        "status":400,
+                        "url":current_url
+                    }
+            return context
             if current_url == url:
 
                 # Find and fill out the card holder name, card number, CVV, expiry year, and expiry month
