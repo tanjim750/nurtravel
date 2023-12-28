@@ -460,7 +460,7 @@ class MakeBooking(View):
         # options=options)
         options = uc.ChromeOptions() 
         options.add_argument("--headless")
-        service = Service(executable_path=uc.v2.ChromeDriverManager())
+        service = Service(executable_path=os.environ.get("CHROMEDRIVER_PATH"))
         options.binary_location = os.environ.get("GOOGLE_BIN")
         options.add_argument("--headless")
         options.add_argument("--disable-dev-shm-usage")
