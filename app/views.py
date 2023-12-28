@@ -459,9 +459,10 @@ class MakeBooking(View):
         # service=service,
         # options=options)
         options = uc.ChromeOptions() 
-        options.headless = True  # Set headless to False to run in non-headless mode
+        options.add_argument("--headless")
+        service = Service(executable_path=uc.v2.ChromeDriverManager())
 
-        self.driver = uc.Chrome(use_subprocess=True, options=options)
+        self.driver = uc.Chrome(use_subprocess=True, options=options,executable_path=uc.v2.ChromeDriverManager().install())
 
         self.url = "https://wafid.com/book-appointment/"
         self.default_value()
